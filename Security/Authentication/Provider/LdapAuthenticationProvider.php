@@ -80,7 +80,7 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
      */
     public function __construct(
         $providerKey,
-        $hideUserNotFoundExceptions = true,
+        $hideUserNotFoundExceptions,
         UserProviderInterface $userProvider,
         LdapUserChecker $userChecker,
         LdapManager $ldap,
@@ -88,6 +88,10 @@ class LdapAuthenticationProvider implements AuthenticationProviderInterface
         LdapUserProvider $ldapUserProvider,
         array $options
     ) {
+        if (null === $hideUserNotFoundExceptions) {
+            $hideUserNotFoundExceptions = true;
+        }
+        
         $this->userProvider = $userProvider;
         $this->ldap = $ldap;
         $this->hideUserNotFoundExceptions = $hideUserNotFoundExceptions;
