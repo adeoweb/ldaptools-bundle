@@ -100,8 +100,12 @@ class LdapGuardAuthenticator extends AbstractGuardAuthenticator
      * @param array $options
      * @param LdapUserProvider $ldapUserProvider
      */
-    public function __construct($hideUserNotFoundExceptions = true, LdapUserChecker $userChecker, LdapManager $ldap, AuthenticationEntryPointInterface $entryPoint, EventDispatcherInterface $dispatcher, AuthenticationSuccessHandlerInterface $successHandler, AuthenticationFailureHandlerInterface $failureHandler, array $options, LdapUserProvider $ldapUserProvider)
+    public function __construct($hideUserNotFoundExceptions, LdapUserChecker $userChecker, LdapManager $ldap, AuthenticationEntryPointInterface $entryPoint, EventDispatcherInterface $dispatcher, AuthenticationSuccessHandlerInterface $successHandler, AuthenticationFailureHandlerInterface $failureHandler, array $options, LdapUserProvider $ldapUserProvider)
     {
+       if (null === $hideUserNotFoundExceptions) {
+            $hideUserNotFoundExceptions = true;
+       }
+        
         $this->userChecker = $userChecker;
         $this->ldap = $ldap;
         $this->entryPoint = $entryPoint;
